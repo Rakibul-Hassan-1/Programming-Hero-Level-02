@@ -35,124 +35,125 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
-function formatString(input, toUpper) {
-    if (toUpper) {
-        return input.toUpperCase();
-    }
-    return input.toLowerCase();
-}
-console.log(formatString("Hello")); // Should output: "hello"
-console.log(formatString("Hello", true)); // Should output: "HELLO"
-console.log(formatString("Hello", false)); // Should output: "hello"
-function filterByRating(items) {
-    return items.filter(function (item) { return item.rating >= 4; });
-}
-var books = [
-    { title: "Book A", rating: 4.5 },
-    { title: "Book B", rating: 3.2 },
-    { title: "Book C", rating: 5.0 },
-];
-console.log(filterByRating(books));
-// Output: [ { title: "Book A", rating: 4.5 }, { title: "Book C", rating: 5.0 } ]
-function concatenateArrays() {
-    var arrays = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        arrays[_i] = arguments[_i];
-    }
-    return arrays.flat();
-}
-console.log(concatenateArrays(["a", "b"], ["c"])); // Output: ["a", "b", "c"]
-console.log(concatenateArrays([1, 2], [3, 4], [5])); // Output: [1, 2, 3, 4, 5]
-var Car = /** @class */ (function () {
-    function Car(make, year, model) {
-        this.make = make;
-        this.year = year;
-        this.model = model;
-    }
-    Car.prototype.getInfo = function () {
-        return "Make: ".concat(this.make, ", Year: ").concat(this.year);
-    };
-    Car.prototype.getModel = function () {
-        return "Model: ".concat(this.model);
-    };
-    return Car;
-}());
-var myCar = new Car("Toyota", 2020, "Corolla");
-console.log(myCar.getInfo()); // Output: "Make: Toyota, Year: 2020"
-console.log(myCar.getModel()); // Output: "Model: Corolla"
-function processValue(value) {
-    if (typeof value === "string") {
-        return value.length;
-    }
-    return value;
-}
-console.log(processValue("hello")); // Output: 5
-console.log(processValue(20)); // Output: 20
-function getMostExpensiveProduct(products) {
-    if (products.length === 0) {
-        return null;
-    }
-    return products.reduce(function (max, current) { return (current.price > max.price ? current : max); }, products[0]);
-}
-var products = [
-    { name: "Pen", price: 10 },
-    { name: "Notebook", price: 25 },
-    { name: "Bag", price: 50 },
-];
-console.log(getMostExpensiveProduct(products));
-// Output: { name: "Bag", price: 50 }
-var Day;
-(function (Day) {
-    Day[Day["Monday"] = 0] = "Monday";
-    Day[Day["Tuesday"] = 1] = "Tuesday";
-    Day[Day["Wednesday"] = 2] = "Wednesday";
-    Day[Day["Thursday"] = 3] = "Thursday";
-    Day[Day["Friday"] = 4] = "Friday";
-    Day[Day["Saturday"] = 5] = "Saturday";
-    Day[Day["Sunday"] = 6] = "Sunday";
-})(Day || (Day = {}));
-function getDayType(day) {
-    if (day === Day.Saturday || day === Day.Sunday) {
-        return "Weekend";
-    }
-    return "Weekday";
-}
-console.log(getDayType(Day.Monday)); // Output: "Weekday"
-console.log(getDayType(Day.Sunday)); // Output: "Weekend"
-function squareAsync(n) {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            if (n < 0) {
-                throw new Error("Negative number not allowed");
-            }
-            return [2 /*return*/, new Promise(function (resolve) {
-                    setTimeout(function () {
-                        resolve(n * n);
-                    }, 1000);
-                })];
-        });
-    });
-}
-(function () { return __awaiter(_this, void 0, void 0, function () {
-    var _a, _b, _c, _d, error_1;
-    return __generator(this, function (_e) {
-        switch (_e.label) {
-            case 0:
-                _e.trys.push([0, 3, , 4]);
-                _b = (_a = console).log;
-                return [4 /*yield*/, squareAsync(4)];
-            case 1:
-                _b.apply(_a, [_e.sent()]); // Output after 1s: 16
-                _d = (_c = console).log;
-                return [4 /*yield*/, squareAsync(-3)];
-            case 2:
-                _d.apply(_c, [_e.sent()]); // This will throw an error
-                return [3 /*break*/, 4];
-            case 3:
-                error_1 = _e.sent();
-                console.log("error:", error_1.message);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+{
+    function formatString(input, toUpper) {
+        if (toUpper) {
+            return input.toUpperCase();
         }
-    });
-}); })();
+        return input.toLowerCase();
+    }
+    console.log(formatString("Hello")); // Should output: "hello"
+    console.log(formatString("Hello", true)); // Should output: "HELLO"
+    console.log(formatString("Hello", false)); // Should output: "hello"
+    function filterByRating(items) {
+        return items.filter(function (item) { return item.rating >= 4; });
+    }
+    var books = [
+        { title: "Book A", rating: 4.5 },
+        { title: "Book B", rating: 3.2 },
+        { title: "Book C", rating: 5.0 },
+    ];
+    console.log(filterByRating(books));
+    // Output: [ { title: "Book A", rating: 4.5 }, { title: "Book C", rating: 5.0 } ]
+    function concatenateArrays() {
+        var arrays = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            arrays[_i] = arguments[_i];
+        }
+        return arrays.flat();
+    }
+    console.log(concatenateArrays(["a", "b"], ["c"])); // Output: ["a", "b", "c"]
+    console.log(concatenateArrays([1, 2], [3, 4], [5])); // Output: [1, 2, 3, 4, 5]
+    var Car = /** @class */ (function () {
+        function Car(make, year, model) {
+            this.make = make;
+            this.year = year;
+            this.model = model;
+        }
+        Car.prototype.getInfo = function () {
+            return "Make: ".concat(this.make, ", Year: ").concat(this.year);
+        };
+        Car.prototype.getModel = function () {
+            return "Model: ".concat(this.model);
+        };
+        return Car;
+    }());
+    var myCar = new Car("Toyota", 2020, "Corolla");
+    console.log(myCar.getInfo()); // Output: "Make: Toyota, Year: 2020"
+    console.log(myCar.getModel()); // Output: "Model: Corolla"
+    function processValue(value) {
+        if (typeof value === "string") {
+            return value.length;
+        }
+        return value;
+    }
+    console.log(processValue("hello")); // Output: 5
+    console.log(processValue(20)); // Output: 20
+    function getMostExpensiveProduct(products) {
+        if (products.length === 0) {
+            return null;
+        }
+        return products.reduce(function (max, current) { return (current.price > max.price ? current : max); }, products[0]);
+    }
+    var products = [
+        { name: "Pen", price: 10 },
+        { name: "Notebook", price: 25 },
+        { name: "Bag", price: 50 },
+    ];
+    console.log(getMostExpensiveProduct(products));
+    // Output: { name: "Bag", price: 50 }
+    var Day = void 0;
+    (function (Day) {
+        Day[Day["Monday"] = 0] = "Monday";
+        Day[Day["Tuesday"] = 1] = "Tuesday";
+        Day[Day["Wednesday"] = 2] = "Wednesday";
+        Day[Day["Thursday"] = 3] = "Thursday";
+        Day[Day["Friday"] = 4] = "Friday";
+        Day[Day["Saturday"] = 5] = "Saturday";
+        Day[Day["Sunday"] = 6] = "Sunday";
+    })(Day || (Day = {}));
+    function getDayType(day) {
+        if (day === Day.Saturday || day === Day.Sunday) {
+            return "Weekend";
+        }
+        return "Weekday";
+    }
+    console.log(getDayType(Day.Monday)); // Output: "Weekday"
+    console.log(getDayType(Day.Sunday)); // Output: "Weekend"
+    function squareAsync(n) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                if (n < 0) {
+                    throw new Error("Negative number not allowed");
+                }
+                return [2 /*return*/, new Promise(function (resolve) {
+                        setTimeout(function () {
+                            resolve(n * n);
+                        }, 1000);
+                    })];
+            });
+        });
+    }
+    (function () { return __awaiter(_this, void 0, void 0, function () {
+        var result1, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 3, , 4]);
+                    return [4 /*yield*/, squareAsync(4)];
+                case 1:
+                    result1 = _a.sent();
+                    console.log(result1); // Output after 1s: 16
+                    return [4 /*yield*/, squareAsync(-3)];
+                case 2:
+                    _a.sent(); // This will throw an error
+                    return [3 /*break*/, 4];
+                case 3:
+                    error_1 = _a.sent();
+                    console.log("Error:", error_1.message); // Output: Error: Negative number not allowed
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
+        });
+    }); })();
+}
