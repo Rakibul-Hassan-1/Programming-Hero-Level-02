@@ -9,5 +9,5 @@ ts-node-dev --respawn --transpile-only your_file_path
 ```
 **Use gitingest for folder structure***
 ```
-https://gitingest.com/Rakibul-Hassan-1/Programming-Hero-Level-02/edit/main/README.md
+https://gitingest.com/Rakibul-Hassan-1/Programming-Hero-Level-02
 ```
