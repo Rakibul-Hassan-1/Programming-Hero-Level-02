@@ -1,4 +1,22 @@
 const http = require("http");
+// create json testing data
+const data = [
+  {
+    title: "typescript",
+    body: "learning mode",
+    createdAt: "2023-01-01T00:00:00Z",
+  },
+  {
+    title: "javascript",
+    body: "learning mode",
+    createdAt: "2023-01-01T00:00:00Z",
+  },
+  {
+    title: "nodejs",
+    body: "learning mode",
+    createdAt: "2023-01-01T00:00:00Z",
+  },
+];
 
 const server = http.createServer((req, res) => {
   // console.log(req.url, req.method);
@@ -6,12 +24,23 @@ const server = http.createServer((req, res) => {
   if (req.url === "/todos" && req.method === "GET") {
     // res.end("All Todos");
 
-    //  customize meta data using writeHead function, also can modify status code 200
-    res.writeHead(201, {
-      "content-type": "text/plain",
-      email: "test@email.com",
+    //  customize meta data (JSON, HTML, IMAGE etc using writeHead function, also can modify status code 200
+    // res.writeHead(200, {
+    //   "content-type": "application/json",
+    // });
+
+    res.writeHead(200, {
+      "content-type": "text/html",
     });
-    res.end("All Todos");
+    // res.setHeader("Content-Type", "text/plain");
+    // res.statusCode = 201;
+    // res.end(JSON.stringify(data));
+    res.end(`
+  
+        <h1>Hello world</h1>
+        <h2>Hello world</h2>
+   
+    `);
   } else if (req.url === "/todos/create-todo" && req.method === "POST") {
     res.end("Create Todo");
   } else {
