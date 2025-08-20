@@ -1,47 +1,36 @@
 const http = require("http");
-// create json testing data
-const data = [
-  {
-    title: "typescript",
-    body: "learning mode",
-    createdAt: "2023-01-01T00:00:00Z",
-  },
-  {
-    title: "javascript",
-    body: "learning mode",
-    createdAt: "2023-01-01T00:00:00Z",
-  },
-  {
-    title: "nodejs",
-    body: "learning mode",
-    createdAt: "2023-01-01T00:00:00Z",
-  },
-];
+const path = require("path");
+const filePath = path.join(__dirname, "db/todo.json");
+const fs = require("fs");
 
 const server = http.createServer((req, res) => {
-  // console.log(req.url, req.method);
-  // res.end("Welcome to the Todo App");
   if (req.url === "/todos" && req.method === "GET") {
-    // res.end("All Todos");
-
-    //  customize meta data (JSON, HTML, IMAGE etc using writeHead function, also can modify status code 200
-    // res.writeHead(200, {
-    //   "content-type": "application/json",
-    // });
-
+    const data = fs.readFileSync(filePath, "utf-8");
     res.writeHead(200, {
-      "content-type": "text/html",
+      "content-type": "application/json",
     });
-    // res.setHeader("Content-Type", "text/plain");
-    // res.statusCode = 201;
-    // res.end(JSON.stringify(data));
-    res.end(`
-  
-        <h1>Hello world</h1>
-        <h2>Hello world</h2>
-   
-    `);
+    res.end(data);
   } else if (req.url === "/todos/create-todo" && req.method === "POST") {
+    //basically ekhane previous json datar sathe new json datar concatination kora hoise
+    let data = "";
+    req.on("data", (chunk) => {
+      data = data + chunk;
+    });
+    req.on("end", () => {
+      console.log("Data received:", data);
+      const { title, body } = JSON.parse(data);
+      // console.log({ title, body });
+      const createdAt = new Date().toLocaleString();
+      const allTodos = fs.readFileSync(filePath, { encoding: "utf-8" });
+      const parseAllTodos = JSON.parse(allTodos);
+      parseAllTodos.push({ title, body, createdAt });
+      console.log(allTodos);
+      fs.writeFileSync(filePath, JSON.stringify(parseAllTodos, null, 2), {
+        encoding: "utf-8",
+      });
+      res.end(JSON.stringify({ title, body, createdAt }),null,2);
+    });
+
     res.end("Create Todo");
   } else {
     res.end("404 Not Found");
