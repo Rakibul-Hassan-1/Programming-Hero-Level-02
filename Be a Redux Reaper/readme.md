@@ -1,5 +1,20 @@
 # Redux Installation and Setup Guide
 
+## Redux Data Flow
+
+Below is a visual representation of how Redux works:
+
+![Redux Data Flow](./redux-flow.png)
+
+The diagram shows the core concepts of Redux:
+
+- **Action**: An object describing what happened (e.g., deposit action with payload)
+- **Dispatch**: The process of sending actions to the store
+- **Store**: Contains the application state and reducers
+- **Reducer**: Pure functions that specify how state changes in response to actions
+- **State**: The single source of truth for your application data
+- **UI**: The view layer that reflects the current state and dispatches actions
+
 ## Installing Redux in a React Project
 
 1. First, install the required packages:
