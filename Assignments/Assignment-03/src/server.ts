@@ -5,7 +5,7 @@ import { connectDB } from './config/database';
 // Load environment variables
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // Start server
 const startServer = async () => {
@@ -17,7 +17,9 @@ const startServer = async () => {
     // Start Express server
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
-      console.log(`📚 Library Management API ready at http://localhost:${PORT}`);
+      console.log(
+        `📚 Library Management API ready at http://localhost:${PORT}`
+      );
       console.log(`🏥 Health check: http://localhost:${PORT}/health`);
     });
   } catch (error) {
@@ -29,11 +31,6 @@ const startServer = async () => {
 // Handle graceful shutdown
 process.on('SIGTERM', () => {
   console.log('SIGTERM received. Shutting down gracefully...');
-  process.exit(0);
-});
-
-process.on('SIGINT', () => {
-  console.log('SIGINT received. Shutting down gracefully...');
   process.exit(0);
 });
 
