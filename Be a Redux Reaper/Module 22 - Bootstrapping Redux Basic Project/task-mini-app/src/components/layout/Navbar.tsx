@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import Logo from "../../assets/Logo";
+import { ModeToggle } from "../mode-toggler";
 
 export default function Navbar() {
   return (
@@ -34,6 +35,9 @@ export default function Navbar() {
         transition-all duration-300 group-hover:w-full"
           ></span>
         </Link>
+      </div>
+      <div className="ml-auto">
+        <ModeToggle />
       </div>
     </nav>
   );
