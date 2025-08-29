@@ -31,17 +31,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { addTask } from "@/redux/features/task/taskSlice";
+import { updateTask } from "@/redux/features/task/taskSlice";
 import { useAppDispatch } from "@/redux/hook";
+import type { ITask } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, PenIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 type Priority = "low" | "medium" | "high";
 
-// Define the form schema
 const taskSchema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string().optional(),
@@ -51,34 +51,47 @@ const taskSchema = z.object({
   }),
 });
 
-// Infer the type from the schema
 type TaskFormValues = z.infer<typeof taskSchema>;
 
-export function AddTaskModal() {
+interface UpdateTaskModalProps {
+  task: ITask;
+}
+
+export function UpdateTaskModal({ task }: UpdateTaskModalProps) {
   const dispatch = useAppDispatch();
-  const onSubmit = (data) => {
-    dispatch(addTask(data));
-    console.log(data);
-  };
 
   const form = useForm<TaskFormValues>({
     resolver: zodResolver(taskSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      priority: "medium" as Priority,
-      deadline: undefined,
+      title: task.title,
+      description: task.description,
+      priority: task.priority as Priority,
+      deadline: task.deadline ? new Date(task.deadline) : new Date(),
     },
   });
+
+  const onSubmit = (data: TaskFormValues) => {
+    dispatch(
+      updateTask({
+        id: task.id,
+        updatedTask: {
+          ...data,
+          completed: task.completed,
+        },
+      })
+    );
+  };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-primary">Add New Task</Button>
+        <Button variant="ghost" size="icon" className="p-1">
+          <PenIcon className="h-4 w-4" />
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add New Task</DialogTitle>
+          <DialogTitle>Update Task</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
@@ -110,6 +123,7 @@ export function AddTaskModal() {
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="priority"
@@ -135,6 +149,7 @@ export function AddTaskModal() {
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="deadline"
@@ -147,8 +162,6 @@ export function AddTaskModal() {
                         <Button
                           variant={"outline"}
                           className={cn(
-                            //jodi full width na lage tahole eta use korte hobe
-                            // "w-[240px] pl-3 text-left font-normal",
                             "pl-3 text-left font-normal",
                             !field.value && "text-muted-foreground"
                           )}
@@ -176,13 +189,14 @@ export function AddTaskModal() {
                 </FormItem>
               )}
             />
+
             <DialogFooter>
               <DialogClose asChild>
                 <Button type="button" variant="outline">
                   Cancel
                 </Button>
               </DialogClose>
-              <Button type="submit">Add Task</Button>
+              <Button type="submit">Update Task</Button>
             </DialogFooter>
           </form>
         </Form>
