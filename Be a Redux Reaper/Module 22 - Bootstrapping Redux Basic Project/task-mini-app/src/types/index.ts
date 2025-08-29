@@ -6,3 +6,8 @@ export interface ITask {
   deadline: string;
   completed: boolean;
 }
+
+export interface IUser {
+  id: string;
+  name: string;
+}
