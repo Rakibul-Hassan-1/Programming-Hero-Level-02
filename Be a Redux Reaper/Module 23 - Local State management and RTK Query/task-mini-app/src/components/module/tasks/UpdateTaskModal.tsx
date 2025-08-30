@@ -73,9 +73,14 @@ export function UpdateTaskModal({ task }: UpdateTaskModalProps) {
 
   const onSubmit = async (data: TaskFormValues) => {
     try {
-      console.log('🔄 Updating task with ID:', task._id || task.id);
+      const taskId = task._id || task.id;
+      if (!taskId) {
+        throw new Error('No task ID available');
+      }
+      
+      console.log('🔄 Updating task with ID:', taskId);
       await updateTask({
-        id: task._id || task.id,
+        id: taskId,
         task: {
           title: data.title,
           description: data.description || "",

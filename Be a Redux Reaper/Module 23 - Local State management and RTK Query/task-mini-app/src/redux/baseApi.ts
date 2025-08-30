@@ -8,7 +8,7 @@ interface TasksResponse {
 }
 
 export const baseApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://taskmaster-rtk-server-nu.vercel.app" }),
   tagTypes: ['Task'],
   endpoints: (builder) => ({
     getTasks: builder.query<TasksResponse, string>({
