@@ -11,3 +11,8 @@ ts-node-dev --respawn --transpile-only your_file_path
 ```
 https://gitingest.com/Rakibul-Hassan-1/Programming-Hero-Level-02
 ```
+**A-4: Simple Todo App:(Frontend+Backend)**
+Using Chadcn, Redux, MongoDB
+```
+https://task-mini-app.vercel.app/
+```
