@@ -2,6 +2,7 @@ import type { RootState } from "@/redux/store";
 import type { ITask } from "@/types";
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
+import { removeUser } from "../user/userSlice";
 
 interface InitialState {
   tasks: ITask[];
@@ -18,6 +19,7 @@ const initialState: InitialState = {
       deadline: "2025-08",
       id: "ae57c4b1-d526-4977-ac5b-83281976cac6",
       completed: false,
+      assignTo: null,
     },
     {
       title: "Another Task",
@@ -26,6 +28,7 @@ const initialState: InitialState = {
       deadline: "2025-09",
       id: "b1c4d5e6-f7g8-9h0i-j1k2-l3m4n5o6p7q8",
       completed: false,
+      assignTo: null,
     },
     {
       title: "Yet Another Task",
@@ -34,6 +37,7 @@ const initialState: InitialState = {
       deadline: "2025-10",
       id: "c1d2e3f4-g5h6-i7j8-k9l0-m1n2o3p4q5r6",
       completed: false,
+      assignTo: null,
     },
     {
       title: "Task 4",
@@ -42,6 +46,7 @@ const initialState: InitialState = {
       deadline: "2025-11",
       id: "d1e2f3g4-h5i6-j7k8-l9m0-n1o2p3q4r5s6",
       completed: false,
+      assignTo: null,
     },
     {
       title: "Task 5",
@@ -50,6 +55,7 @@ const initialState: InitialState = {
       deadline: "2025-12",
       id: "e1f2g3h4-i5j6-k7l8-m9n0-o1p2q3r4s5t6",
       completed: false,
+      assignTo: null,
     },
     {
       title: "Task 6",
@@ -58,6 +64,7 @@ const initialState: InitialState = {
       deadline: "2025-12",
       id: "f1g2h3i4-j5k6-l7m8-n9o0-p1q2r3s4t5u6",
       completed: false,
+      assignTo: null,
     },
   ],
   filter: "all",
@@ -103,6 +110,18 @@ const taskSlice = createSlice({
     ) => {
       state.filter = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(removeUser, (state, action) => {
+      state.tasks.forEach((task) => {
+        if (task.assignTo === action.payload) {
+          task.assignTo = null;
+        }
+        else {
+          task.assignTo = task.assignTo;
+        }
+      });
+    });
   },
 });
 

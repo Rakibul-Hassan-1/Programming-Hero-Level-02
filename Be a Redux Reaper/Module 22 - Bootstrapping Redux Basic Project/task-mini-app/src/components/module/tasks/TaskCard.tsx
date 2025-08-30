@@ -5,7 +5,8 @@ import {
   deleteTask,
   toggleCompleteState,
 } from "@/redux/features/task/taskSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { selectUsers } from "@/redux/features/user/userSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import type { ITask } from "@/types";
 import { Trash2 } from "lucide-react";
 import { UpdateTaskModal } from "./UpdateTaskModal";
@@ -14,7 +15,8 @@ interface IProps {
 }
 export default function TaskCard({ task }: IProps) {
   const dispatch = useAppDispatch();
-
+const users = useAppSelector(selectUsers)
+const assignedUser = users.find((user) => user.id === task.assignTo)
   return (
     <div className="border px-5 py-3 rounded-md">
       <div className="flex justify-between items-center">
@@ -47,6 +49,7 @@ export default function TaskCard({ task }: IProps) {
           />
         </div>
       </div>
+      <p>Assigned to: {assignedUser?.name || "Unassigned"}</p>
       <p className="mt-5">{task.description}</p>
     </div>
   );

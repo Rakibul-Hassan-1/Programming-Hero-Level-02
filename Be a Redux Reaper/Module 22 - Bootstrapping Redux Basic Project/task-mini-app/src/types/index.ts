@@ -5,6 +5,7 @@ export interface ITask {
   priority: "low" | "medium" | "high";
   deadline: string;
   completed: boolean;
+  assignTo: string|null;
 }
 
 export interface IUser {
